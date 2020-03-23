@@ -5,3 +5,6 @@
 /.vs
 /BlazorClient/obj
 /BlazorClient/bin/Release/netstandard2.1
+/Mavo/Properties/PublishProfiles
+/Mavo/obj
+/Mavo/bin
