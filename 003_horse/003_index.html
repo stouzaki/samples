@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>競馬</title>
+    <link rel="stylesheet" href="./003_common.css" />
+    <style>
+      main {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        grid-template-columns: 1fr;
+        width: 100%;
+        /* margin-top: 3rem; */
+        /* height: 100%; */
+        /* background-color: blue; */
+      }
+
+      .main-header {
+        grid-row: 1;
+        grid-column: 1;
+        /* background-color: aqua; */
+      }
+
+      .main-detail {
+        grid-row: 2;
+        grid-column: 1;
+        /* background-color: #ccc; */
+      }
+
+      .main-detail th {
+        background-color: #2f4f4f;
+        color: white;
+      }
+
+      .main-detail td {
+        background-color: white;
+      }
+
+      .d-sex {
+        font-size: 0.8rem;
+      }
+
+      .d-sex.d-female {
+        color: red;
+      }
+
+      .d-sex.male {
+        color: blue;
+      }
+
+      .d-parent {
+        font-size: 0.5rem;
+        color: #808080;
+      }
+
+      .d-weight {
+        font-size: 0.8rem;
+      }
+
+      .d-stable {
+        font-size: 0.8rem;
+      }
+
+      .d-stable-comment {
+        font-size: 0.8rem;
+      }
+
+      .d-table {
+        width: 0;
+        table-layout: fixed;
+      }
+
+      .d-fix-1 {
+        position: sticky;
+        left: 0;
+      }
+
+      .d-fix-2 {
+        position: sticky;
+        left: 1rem;
+      }
+
+      /* .d-table thead th {
+        position: sticky;
+        top: 0;
+      } */
+
+      .d-table th,
+      .d-table td {
+        box-shadow: 0 0 0 0.4px #ccc inset;
+        /* border: solid 1px #ccc; */
+      }
+
+      .d-col-no {
+        width: 1rem;
+      }
+
+      .d-col-horse {
+        width: 10rem;
+      }
+
+      .d-col-mark {
+        width: 1rem;
+      }
+
+      .d-col-rt {
+        width: 3rem;
+      }
+
+      .d-col-jockey {
+        width: 6rem;
+      }
+
+      .d-col-comment {
+        width: 15rem;
+      }
+      .d-col-history {
+        width: 21rem;
+      }
+
+      .d-grid {
+        display: grid;
+        grid-template-columns: 3.4rem 1fr 1rem 1rem;
+        font-size: 0.8rem;
+      }
+
+      .d-grid-order {
+        grid-row: 1;
+        grid-column: 1;
+        align-self: center;
+        justify-self: center;
+        font-size: 1.2rem;
+      }
+
+      .d-grid-race {
+        grid-row: 1;
+        grid-column: 2;
+      }
+
+      .d-grid-video-normal {
+        grid-row: 1;
+        grid-column: 3;
+      }
+
+      .d-grid-video-patrol {
+        grid-row: 1;
+        grid-column: 4;
+      }
+
+      .d-grid-passing {
+        grid-row: 2;
+        grid-column: 1;
+      }
+
+      .d-grid-jockey {
+        grid-row: 2;
+        grid-column: 2;
+      }
+
+      .d-grid-pace {
+        grid-row: 3;
+        grid-column: 1/4;
+      }
+
+      .d-grid-time {
+        grid-row: 4;
+        grid-column: 1/4;
+      }
+
+      .d-grid-result-comment {
+        grid-row: 5;
+        grid-column: 1/4;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <ul>
+        <li>
+          <select name="" id="" class="normal">
+            <option value="">2021/03/27(土)</option>
+          </select>
+        </li>
+        <li>
+          <select name="" id="" class="normal selected">
+            <option value="">中山1R ダ1200m</option>
+          </select>
+        </li>
+        <li>
+          <select name="" id="" class="normal">
+            <option value="">阪神1R 芝1200m</option>
+          </select>
+        </li>
+        <li>
+          <select name="" id="" class="normal">
+            <option value="">中京1R 障3890m</option>
+          </select>
+        </li>
+      </ul>
+    </header>
+    <main>
+      <section class="main-header">
+        <p>
+          <span class="h-date">20/20/7/18(土)</span>
+          <span class="h-no">函館11R</span>
+          <span class="h-time">15:25</span>
+          <span class="h-track">芝</span>
+          <span class="h-direction">外</span>
+          <span class="h-course">B</span>
+          <span class="h-class">3歳以上500万下</span>
+          <span class="h-condition">(特指)(混)定量</span>
+          <span class="h-name">五稜郭ステークス</span>
+          <span class="h-grade">(G3)</span>
+        </p>
+        <p></p>
+      </section>
+      <section class="main-detail">
+        <table class="d-table">
+          <colgroup>
+            <col class="d-col-no" />
+            <col class="d-col-horse" />
+            <col class="d-col-mark" />
+            <col class="d-col-rt" />
+            <col class="d-col-jockey" />
+            <col class="d-col-comment" />
+            <col class="d-col-history" />
+            <col class="d-col-history" />
+            <col class="d-col-history" />
+            <col class="d-col-history" />
+            <col class="d-col-history" />
+            <col class="d-col-history" />
+          </colgroup>
+          <thead>
+            <th class="d-fix-1">#</th>
+            <th class="d-fix-2">馬</th>
+            <th>印</th>
+            <th>RT</th>
+            <th>
+              <div>騎手</div>
+              <div>調教師</div>
+            </th>
+            <th>調教短評／厩舎の話</th>
+            <th>1走前</th>
+            <th>2走前</th>
+            <th>3走前</th>
+            <th>4走前</th>
+            <th>5走前</th>
+            <th>6走前</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="frame-1 d-fix-1">1</td>
+              <td class="d-fix-2">
+                <p class="d-horse">
+                  シャルロワ <span class="d-sex d-female">牝4</span>
+                </p>
+                <p class="d-parent">父 ハーツクライ</p>
+                <p class="d-parent">母 フェリシア</p>
+              </td>
+              <td>◎</td>
+              <td>32.5</td>
+              <td>
+                <p class="d-jockey">
+                  西村敦<span class="d-weight">(52.0)</span>
+                </p>
+                <p class="d-trainer">梅田<span class="d-stable">(栗)</span></p>
+              </td>
+              <td>
+                <p class="d-training-commnet">→ まずまず仕上がる</p>
+                <p class="d-stable-comment">
+                  ○【今野師】順調です。前進気勢を欠くところがありますが、格上の前々走が最後まで集中していいレースができていました。そういうレースができれば楽しみですね。
+                </p>
+              </td>
+              <td>
+                <div class="d-grid">
+                  <div class="d-grid-order">13</div>
+                  <div class="d-grid-race">
+                    <p>阪神20/04/12 ダ1200右外B 15頭 10番</p>
+                    <p>函館道新スポーツ杯 3歳以上2勝クラス</p>
+                  </div>
+                  <div class="d-grid-video-normal">▶</div>
+                  <div class="d-grid-video-patrol">▷</div>
+                  <div class="d-grid-passing">⑦⑨➐⑨</div>
+                  <div class="d-grid-jockey">藤田菜 52.0 408kg(-2)</div>
+                  <div class="d-grid-pace">H 12.3-10.7-11.3-34.6</div>
+                  <div class="d-grid-time">
+                    <p>1:12.7(35.7-36.3)</p>
+                    <p>セントウル(+0.5) エアスピネル(-0.1)</p>
+                  </div>
+                  <div class="d-grid-result-comment">
+                    <p>→ まずまず仕上がる</p>
+                    <p>
+                      若さを見せて外へ外へと膨れてしまいましたが、それでも前が残る展開のなか、中団からよく差してきてくれました。そのあたりが解消されてくればいいと思います。
+                    </p>
+                  </div>
+                </div>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+
+            <!-- 2 -->
+            <tr>
+              <td class="frame-1 d-fix-1">1</td>
+              <td class="d-fix-2">
+                <p class="d-horse">
+                  シャルロワ <span class="d-sex d-female">牝4</span>
+                </p>
+                <p class="d-parent">父 ハーツクライ</p>
+                <p class="d-parent">母 フェリシア</p>
+              </td>
+              <td>◎</td>
+              <td>32.5</td>
+              <td>
+                <p class="d-jockey">
+                  西村敦<span class="d-weight">(52.0)</span>
+                </p>
+                <p class="d-trainer">梅田<span class="d-stable">(栗)</span></p>
+              </td>
+              <td>
+                <p class="d-training-commnet">→ まずまず仕上がる</p>
+                <p class="d-stable-comment">
+                  ○【今野師】順調です。前進気勢を欠くところがありますが、格上の前々走が最後まで集中していいレースができていました。そういうレースができれば楽しみですね。
+                </p>
+              </td>
+              <td>
+                <div class="d-grid">
+                  <div class="d-grid-order">13</div>
+                  <div class="d-grid-race">
+                    <p>阪神20/04/12 ダ1200右外B 15頭 10番</p>
+                    <p>函館道新スポーツ杯 3歳以上2勝クラス</p>
+                  </div>
+                  <div class="d-grid-video-normal">▶</div>
+                  <div class="d-grid-video-patrol">▷</div>
+                  <div class="d-grid-passing">⑦⑨➐⑨</div>
+                  <div class="d-grid-jockey">藤田菜 52.0 408kg(-2)</div>
+                  <div class="d-grid-pace">H 12.3-10.7-11.3-34.6</div>
+                  <div class="d-grid-time">
+                    <p>1:12.7(35.7-36.3)</p>
+                    <p>セントウル(+0.5) エアスピネル(-0.1)</p>
+                  </div>
+                  <div class="d-grid-result-comment">
+                    <p>→ まずまず仕上がる</p>
+                    <p>
+                      若さを見せて外へ外へと膨れてしまいましたが、それでも前が残る展開のなか、中団からよく差してきてくれました。そのあたりが解消されてくればいいと思います。
+                    </p>
+                  </div>
+                </div>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+
+            <!-- 3 -->
+            <tr>
+              <td class="frame-1 d-fix-1">1</td>
+              <td class="d-fix-2">
+                <p class="d-horse">
+                  シャルロワ <span class="d-sex d-female">牝4</span>
+                </p>
+                <p class="d-parent">父 ハーツクライ</p>
+                <p class="d-parent">母 フェリシア</p>
+              </td>
+              <td>◎</td>
+              <td>32.5</td>
+              <td>
+                <p class="d-jockey">
+                  西村敦<span class="d-weight">(52.0)</span>
+                </p>
+                <p class="d-trainer">梅田<span class="d-stable">(栗)</span></p>
+              </td>
+              <td>
+                <p class="d-training-commnet">→ まずまず仕上がる</p>
+                <p class="d-stable-comment">
+                  ○【今野師】順調です。前進気勢を欠くところがありますが、格上の前々走が最後まで集中していいレースができていました。そういうレースができれば楽しみですね。
+                </p>
+              </td>
+              <td>
+                <div class="d-grid">
+                  <div class="d-grid-order">13</div>
+                  <div class="d-grid-race">
+                    <p>阪神20/04/12 ダ1200右外B 15頭 10番</p>
+                    <p>函館道新スポーツ杯 3歳以上2勝クラス</p>
+                  </div>
+                  <div class="d-grid-video-normal">▶</div>
+                  <div class="d-grid-video-patrol">▷</div>
+                  <div class="d-grid-passing">⑦⑨➐⑨</div>
+                  <div class="d-grid-jockey">藤田菜 52.0 408kg(-2)</div>
+                  <div class="d-grid-pace">H 12.3-10.7-11.3-34.6</div>
+                  <div class="d-grid-time">
+                    <p>1:12.7(35.7-36.3)</p>
+                    <p>セントウル(+0.5) エアスピネル(-0.1)</p>
+                  </div>
+                  <div class="d-grid-result-comment">
+                    <p>→ まずまず仕上がる</p>
+                    <p>
+                      若さを見せて外へ外へと膨れてしまいましたが、それでも前が残る展開のなか、中団からよく差してきてくれました。そのあたりが解消されてくればいいと思います。
+                    </p>
+                  </div>
+                </div>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+    <footer>
+      <ul>
+        <li><a class="selected" href="#">レース</a></li>
+        <li><a href="#">投票</a></li>
+        <li><a href="#">収支</a></li>
+        <li><a href="#">データ</a></li>
+        <li><a href="#">予備</a></li>
+      </ul>
+    </footer>
+  </body>
+</html>

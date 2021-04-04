@@ -1,0 +1,180 @@
+/* start reset */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  vertical-align: baseline;
+  font-weight: normal;
+  border-collapse: collapse;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  font-family: "Meiryo", "メイリオ", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+}
+
+select {
+  appearance: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+/* end reset */
+
+header {
+  background-color: #268300;
+  height: 3rem;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  padding-top: 0.5rem;
+}
+
+header ul {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+header ul li {
+  list-style-type: none;
+  margin-right: 2rem;
+}
+
+header ul li:first-child {
+  margin-left: 2rem;
+  margin-right: auto;
+}
+
+header ul li:nth-child(2) {
+  margin-left: 2rem;
+}
+
+footer {
+  background-color: #268300;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 3rem;
+  z-index: 10;
+}
+
+footer ul {
+  display: table;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+footer ul li {
+  display: table-cell;
+  list-style-type: none;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  text-align: center;
+  vertical-align: middle;
+  width: 20%;
+  height: 100%;
+}
+
+footer ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  height: 100%;
+  padding-top: 0.7rem;
+}
+
+footer ul li a.selected {
+  background-color: blue;
+}
+
+footer ul li a:hover {
+  background-color: royalblue;
+}
+
+main {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+button.normal {
+  border: 1px solid #ccc;
+  border-radius: 0.3rem;
+}
+
+select.normal {
+  border: 1px solid #ccc;
+  min-width: 10rem;
+  min-height: 2rem;
+  padding: 0 1rem;
+  border-radius: 0.3rem;
+
+  background-image: linear-gradient(
+      45deg,
+      transparent 50%,
+      rgba(0, 0, 0, 0.6) 50%
+    ),
+    linear-gradient(135deg, rgba(0, 0, 0, 0.6) 50%, transparent 50%);
+  background-size: 6px 5px, 5px 5px;
+  background-position: calc(100% - 15px) 50%, calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+}
+
+select.selected {
+  background-color: blue;
+  color: white;
+}
+
+.frame-1 {
+  background-color: white;
+  color: black;
+}
+
+.frame-2 {
+  background-color: black;
+  color: white;
+}
+
+.frame-3 {
+  background-color: red;
+  color: white;
+}
+
+.frame-4 {
+  background-color: blue;
+  color: white;
+}
+
+.frame-5 {
+  background-color: yellow;
+  color: black;
+}
+
+.frame-6 {
+  background-color: green;
+  color: white;
+}
+
+.frame-7 {
+  background-color: orange;
+  color: black;
+}
+
+.frame-8 {
+  background-color: pink;
+  color: black;
+}
