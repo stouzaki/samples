@@ -134,6 +134,11 @@ select.normal {
   background-repeat: no-repeat;
 }
 
+select.normal:hover {
+  background-color: royalblue;
+  color: white;
+}
+
 select.selected {
   background-color: blue;
   color: white;
