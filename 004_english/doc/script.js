@@ -1,52 +1,48 @@
+// 初期表示
 $(function () {
-
-
-    // document.getElementById("inputparam").value = param;
-
-
-    setArticleText("./script-01/1-01/script.json")
+  const jsonFullName = getJsonPath("script.json");
+  setArticleText(jsonFullName);
 });
 
-function getJsonPath {
-    let str = "./";
+// クエリパラメータからJsonPathを取得する
+function getJsonPath(fileName) {
+  let str = "./";
 
-    const queryValues = getQueryParameter();
-    queryValues.forEach(value => {
-        // ココ書く
-    });
+  const queryValues = getQueryParameter();
+  queryValues.forEach((value) => {
+    str += `${value}/`;
+  });
 
+  return str + fileName;
 }
 
-
+// クエリパラメータを取得する
 function getQueryParameter() {
+  let array = [];
 
-    let array = [];
+  const queryString = location.search;
+  const parameters = queryString.split("&");
 
-    const queryString = location.search;
-    console.log(`param: ${param}`);
+  parameters.forEach((parameter) => {
+    const value = parameter.split("=")[1];
+    array.push(value);
+  });
 
-    const parameters = queryString.split('&');
-    parameters.forEach(parameter => {
-        const value = parameter.split("=")[1];
-        array.push(value)
-    });
+  return array;
 }
 
-
+// Jsonから本文を設定する
 function setArticleText(name) {
-    $.getJSON(name, datas => {
-        datas.forEach(data => {
+  $.getJSON(name, (datas) => {
+    datas.forEach((data) => {
+      const target = $("main")[0];
+      const content = $("#scriptTemplate")[0].content;
 
-            let target = document.querySelector("main");
-            let content = document.querySelector("#scriptTemplate").content;
+      const clone = document.importNode(content, true);
+      clone.querySelector("p.ja").textContent = data.ja;
+      clone.querySelector("p.en").textContent = data.en;
 
-            const clone = document.importNode(content, true);
-            clone.querySelector("p.ja").textContent = data.ja;
-            clone.querySelector("p.en").textContent = data.en;
-
-            target.appendChild(clone);
-
-            console.log(`id=${data.id}, ja=${data.ja}, en=${data.en}`);
-        });
-    })
+      target.appendChild(clone);
+    });
+  });
 }
