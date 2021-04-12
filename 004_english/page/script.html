@@ -3,183 +3,176 @@
 <!-- http://127.0.0.1:5500/004_english/doc/script.html?c1=script-01&c2=1-01 -->
 
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Title</title>
+    <link rel="stylesheet" href="../common.css" />
+    <script src="../lib/jquery-3.6.0.min.js"></script>
+    <script src="./script.js"></script>
+    <style>
+      header {
+        background-color: #fbfbfb;
+        height: 3rem;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        border-bottom: 1px solid #ccc;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Title</title>
-  <link rel="stylesheet" href="../common.css" />
-  <script src="../lib/jquery-3.6.0.min.js"></script>
-  <script src="./script.js"></script>
-  <style>
-    header {
-      background-color: #fbfbfb;
-      height: 3rem;
-      width: 100%;
-      position: fixed;
-      top: 0;
-      z-index: 10;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-    }
+      header ul {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+      }
 
-    header ul {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      width: 100%;
-    }
+      header ul li {
+        list-style-type: none;
+        margin-right: 2rem;
+      }
 
-    header ul li {
-      list-style-type: none;
-      margin-right: 2rem;
-    }
+      header ul li:first-child {
+        margin-left: 2rem;
+        margin-right: auto;
+      }
 
-    header ul li:first-child {
-      margin-left: 2rem;
-      margin-right: auto;
-    }
+      footer {
+        background-color: #fff;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 3rem;
+        z-index: 10;
+      }
 
-    footer {
-      /* background-color: #32cd32; */
-      background-color: #ccc;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      height: 3rem;
-      z-index: 10;
-    }
+      footer ul.table {
+        display: table;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+      }
 
-    footer ul.table {
-      display: table;
-      width: 100%;
-      height: 100%;
-    }
+      footer ul.table li {
+        display: table-cell;
+        list-style-type: none;
+        /* border-left: 1px solid #ccc;
+        border-right: 1px solid #ccc; */
+        /* text-align: center; */
+        vertical-align: middle;
+        width: 33%;
+        height: 100%;
+      }
 
-    footer ul.table li {
-      display: table-cell;
-      list-style-type: none;
-      border-left: 1px solid #ccc;
-      border-right: 1px solid #ccc;
-      /* text-align: center; */
-      vertical-align: middle;
-      width: 33%;
-      height: 100%;
-    }
+      footer ul.btn-group li {
+        width: 13%;
+        height: 2.7rem;
+        vertical-align: middle;
+        border-right: 1px solid #fff;
+        cursor: pointer;
+        background-color: #ccc;
+        color: #fff;
+      }
 
-    footer ul.btn-group li {
-      width: 13%;
-      height: 2.7rem;
-      vertical-align: middle;
-      /* border: 1px solid #fff; */
-      cursor: pointer;
-      background-color: #ccc;
-    }
+      footer ul.btn-group li:hover {
+        background-color: #3333ff;
+      }
 
-    footer ul.btn-group li:last-of-type {
-      border-radius: 0 4px 4px 0;
-    }
+      footer ul.btn-group li:last-of-type {
+        border-radius: 0 4px 4px 0;
+        border-right: none;
+      }
 
-    footer ul.btn-group li:first-of-type {
-      border-radius: 4px 0 0 4px;
-    }
+      footer ul.btn-group li:first-of-type {
+        border-radius: 4px 0 0 4px;
+      }
 
-    footer ul.btn-group li.selected {
-      background-color: blue;
-      color: white;
+      footer ul.btn-group li.selected {
+        background-color: #0000ff;
+        color: white;
+      }
 
-    }
+      main {
+        padding-top: 3.2rem;
+        padding-bottom: 3.2rem;
+      }
 
+      footer button.normal {
+        border: 1px solid #ccc;
+        border-radius: 0.5rem;
+        height: 100%;
+        width: 90%;
+      }
 
+      footer button.normal:hover {
+        background-color: #3333ff;
+      }
 
-    main {
-      padding-top: 3rem;
-      padding-bottom: 3rem;
-    }
+      footer button.default {
+        border: 1px solid #ccc;
+        border-radius: 0.5rem;
+        height: 100%;
+        width: 90%;
+      }
 
-    footer select {
-      border: 1px solid #ccc;
-      height: 90%;
-      width: 90%;
-      /* min-width: 10rem;
-            min-height: 2rem; */
-      padding: 0 1rem;
-      border-radius: 0.3rem;
-      background-image: linear-gradient(45deg,
-          transparent 50%,
-          rgba(0, 0, 0, 0.6) 50%),
-        linear-gradient(135deg, rgba(0, 0, 0, 0.6) 50%, transparent 50%);
-      background-size: 6px 5px, 5px 5px;
-      background-position: calc(100% - 15px) 50%, calc(100% - 10px) 50%;
-      background-repeat: no-repeat;
-    }
+      footer button.default:hover {
+        background-color: #3333ff;
+        color: #fff;
+      }
 
-    footer button.normal {
-      border: 1px solid #ccc;
-      border-radius: 0.5rem;
-      height: 90%;
-      width: 90%;
-    }
+      article {
+        border: 1px solid #ccc;
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+      }
 
-    footer .group {
-      height: 100%;
-    }
+      article:hover {
+        background-color: #ffffea;
+      }
 
-    footer .group button {
-      height: 90%;
-      /* width: 10%; */
-      margin: 0;
-      padding: 0;
-      /* display: inline-block; */
-    }
+      article p {
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
 
-    article {
-      border: 1px solid #ccc;
-      padding: 0.5rem;
-    }
-
-    article p {
-      font-size: 0.9rem;
-    }
-  </style>
-</head>
-
-<body>
-  <header>
-    <ul>
-      <li><a href="">Top</a></li>
-      <li><a href="">Link</a></li>
-      <li><a href="">Link</a></li>
-    </ul>
-  </header>
-  <main id="main"></main>
-  <footer>
-    <ul class="table">
-      <li>
-        <!-- <div class="group">
-          <button>0.5倍</button><button>0.8倍</button><button>1.0倍</button><button>1.2倍</button><button>1.5倍</button><button>2.0倍</button>
-        </div> -->
-        <ul id="playBackSpeed" class="btn-group">
-          <li>×0.5</li>
-          <li>×0.8</li>
-          <li>×1.0</li>
-          <li>×1.2</li>
-          <li>×1.5</li>
-          <li class="selected">×2.0</li>
-        </ul>
-      </li>
-      <li><button class="normal">再生/停止</button></li>
-      <li><a href="../004_index.html">終了</a></li>
-    </ul>
-  </footer>
-  <template id="scriptTemplate">
-    <article>
-      <p class="ja"></p>
-      <p class="en"></p>
-    </article>
-  </template>
-</body>
-
+  <body>
+    <header>
+      <ul>
+        <li><a href="">Top</a></li>
+        <li><a href="">Link</a></li>
+        <li><a href="">Link</a></li>
+      </ul>
+    </header>
+    <main id="main"></main>
+    <footer>
+      <ul class="table">
+        <li>
+          <ul id="playBackSpeed" class="table btn-group">
+            <li id="playBackSpeed_5" data-speed="5">×0.5</li>
+            <li id="playBackSpeed_8" data-speed="8">×0.8</li>
+            <li id="playBackSpeed_10" data-speed="10" class="selected">×1.0</li>
+            <li id="playBackSpeed_12" data-speed="12">×1.2</li>
+            <li id="playBackSpeed_15" data-speed="15">×1.5</li>
+            <li id="playBackSpeed_20" data-speed="20">×2.0</li>
+          </ul>
+        </li>
+        <li><button class="normal">再生 / 停止</button></li>
+        <li><button class="default">終了</button></li>
+      </ul>
+    </footer>
+    <template id="scriptTemplate">
+      <article>
+        <p class="ja"></p>
+        <p class="en"></p>
+      </article>
+    </template>
+  </body>
 </html>
