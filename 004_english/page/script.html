@@ -159,6 +159,10 @@
     .btn-switch.selected {
       background-color: #8b4513;
     }
+
+    article.selected {
+      background-color: #ffffea;
+    }
   </style>
 </head>
 
@@ -185,8 +189,8 @@
           <li id="playBackSpeed_20" data-speed="20">×2.0</li>
         </ul>
       </li>
-      <li><button class="normal">再生 / 停止</button></li>
-      <li><button class="default">終了</button></li>
+      <li><button id="btnPlayPause" class="normal">再生 / 停止</button></li>
+      <li><button id="btnEnd" class="default">終了</button></li>
     </ul>
   </footer>
   <template id="scriptTemplate">
