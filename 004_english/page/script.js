@@ -25,7 +25,7 @@ $(function () {
 window.onload = function () {
   let $s = $(".script");
   $s.each(function (index, element) {
-    let id = $(element).attr('id');
+    let id = $(element).attr("id");
     let audio = new Audio();
     audio.preload = "auto";
     audio.src = getTargetFolder() + id + ".mp3";
@@ -33,54 +33,44 @@ window.onload = function () {
     audios[id] = audio;
 
     // 再生イベント（個別）
-    $(element).off('click');
-    $(element).on('click', function (e) {
+    $(element).off("click");
+    $(element).on("click", function (e) {
       playNo = parseInt(e.currentTarget.id);
-      indiviualPlay()
+      indiviualPlay();
     });
 
     // 再生終了時イベント（個別）
-    audios[id].addEventListener('ended', onPlayEnded);
+    audios[id].addEventListener("ended", onPlayEnded);
 
     // 最後の番号
     maxPlayNo = Object.keys(audios).length;
 
-    // // 最初から全て再生
-    // $iconAllPlay.off('click');
-    // $iconAllPlay.on('click', function (e) {
-    //   // 終了時に次を再生するイベント登録
-    //   Object.keys(audios).forEach(key => {
-    //     audios[key].addEventListener('ended', onContinuousPlayEnded);
-    //   });
-    //   // 再生中のものは全て停止
-    //   Object.keys(audios).forEach(id => {
-    //     let audio = audios[id]
-    //     let isPlaying = audio.currentTime > 0 && !audio.paused && !audio.ended;
-    //     if (isPlaying) {
-    //       audio.pause();
-    //       audio.currentTime = 0;
-    //     }
-    //     let $div = $("#" + id);
-    //     $div.removeClass('script-selected');
-    //   });
-
-    //   // 最初の音声を再生
-    //   playNo = 1;
-    //   play();
-    // });
-
     // 再生ボタンイベント
-    $btnPlayPause.off('click');
-    $btnPlayPause.on('click', function (e) {
+    $btnPlayPause.off("click");
+    $btnPlayPause.on("click", function (e) {
       // 終了時に次を再生するイベント登録
-      Object.keys(audios).forEach(key => {
-        audios[key].addEventListener('ended', onContinuousPlayEnded);
+      Object.keys(audios).forEach((key) => {
+        audios[key].addEventListener("ended", onContinuousPlayEnded);
       });
       playPause();
     });
+  });
 
+  // 和文ボタンイベント
+  setEvent("#btnJa", "click", () => onClickBtnSwitch("#btnJa", "p.ja"));
+  setEvent("#btnEn", "click", () => onClickBtnSwitch("#btnEn", "p.en"));
+};
 
-  })
+// 和文・英文ボタンクリック
+function onClickBtnSwitch(btnSelecor, pSelector) {
+  $(btnSelecor).toggleClass("selected");
+  $(pSelector).toggleClass("hidden");
+}
+
+// イベントを設定する
+function setEvent(selector, eventName, func) {
+  $(selector).off(eventName);
+  $(selector).on(eventName, func);
 }
 
 // 再生／一時停止
@@ -90,26 +80,20 @@ function playPause() {
   } else {
     play();
   }
-  // if ($btnPlayPause.hasClass('play')) {
-  //   play();
-  // } else {
-  //   pause();
-  // }
 }
-
 
 // 再生（個別）
 function indiviualPlay() {
   // 再生中のものは全て停止
-  Object.keys(audios).forEach(id => {
-    let audio = audios[id]
+  Object.keys(audios).forEach((id) => {
+    let audio = audios[id];
     let isPlaying = audio.currentTime > 0 && !audio.paused && !audio.ended;
     if (isPlaying) {
       audio.pause();
       audio.currentTime = 0;
     }
     let $div = $("#" + id);
-    $div.removeClass('selected');
+    $div.removeClass("selected");
   });
   // 連続再生イベント削除
   removeContinuousPlaybackEndedEvent();
@@ -119,29 +103,31 @@ function indiviualPlay() {
 
 // 再生中判定
 function isPlay() {
-  Object.keys(audios).forEach(id => {
-    let audio = audios[id]
+  let isPlay = false;
+  Object.keys(audios).forEach((id) => {
+    let audio = audios[id];
     if (audio.currentTime > 0 && !audio.paused && !audio.ended) {
-      return true;
-    };
+      isPlay = true;
+      return;
+    }
   });
-  return false;
+  return isPlay;
 }
 
 // 再生
 function play() {
-  let id = ('00' + playNo).slice(-2);
+  let id = ("00" + playNo).slice(-2);
   let audio = audios[id];
   let $div = $("#" + id);
-  $('body,html').animate({ scrollTop: $div.offset().top - 180 }, 400, 'swing');
-  $div.addClass('selected');
+  $("body,html").animate({ scrollTop: $div.offset().top - 180 }, 400, "swing");
+  $div.addClass("selected");
   audio.play();
   // changeDisplayToPause();
 }
 
 // 一時停止
 function pause() {
-  let id = ('00' + playNo).slice(-2);
+  let id = ("00" + playNo).slice(-2);
   let audio = audios[id];
   audio.pause();
   // changeDisplayToPlay();
@@ -149,9 +135,9 @@ function pause() {
 
 // 連続再生イベント削除
 function removeContinuousPlaybackEndedEvent() {
-  let id = ('00' + playNo).slice(-2);
+  let id = ("00" + playNo).slice(-2);
   let audio = audios[id];
-  audio.removeEventListener('ended', onContinuousPlayEnded)
+  audio.removeEventListener("ended", onContinuousPlayEnded);
 }
 
 // クエリパラメータから対象フォルダを取得する
@@ -166,9 +152,9 @@ function getTargetFolder() {
 
 // 再生終了時イベント（個別再生用）
 function onPlayEnded(e) {
-  let id = ('00' + playNo).slice(-2);
+  let id = ("00" + playNo).slice(-2);
   let $div = $("#" + id);
-  $div.removeClass('selected');
+  $div.removeClass("selected");
   // changeDisplayToPlay();
 }
 
@@ -178,6 +164,7 @@ function onContinuousPlayEnded() {
   removeContinuousPlaybackEndedEvent();
 
   if (playNo < maxPlayNo) {
+    // play(++playNo);
     play(++playNo);
   } else {
     playNo = 1;
@@ -220,7 +207,9 @@ function setArticleText(name) {
       const content = $("#scriptTemplate")[0].content;
 
       const clone = document.importNode(content, true);
-      clone.querySelector("article").setAttribute("id", ('00' + (i + 1)).slice(-2));
+      clone
+        .querySelector("article")
+        .setAttribute("id", ("00" + (i + 1)).slice(-2));
       clone.querySelector("p.ja").textContent = data.ja;
       clone.querySelector("p.en").textContent = data.en;
 

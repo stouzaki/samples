@@ -52,3 +52,7 @@ button.normal {
   background-color: blue;
   color: #fff;
 }
+
+.hidden {
+  visibility: hidden;
+}
