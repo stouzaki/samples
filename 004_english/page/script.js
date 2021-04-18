@@ -33,11 +33,7 @@ window.onload = function () {
     audios[id] = audio;
 
     // 再生イベント（個別）
-    $(element).off("click");
-    $(element).on("click", function (e) {
-      playNo = parseInt(e.currentTarget.id);
-      indiviualPlay();
-    });
+    setEvent(`#${id}`, "click", (e) => onClickScript(e));
 
     // 再生終了時イベント（個別）
     audios[id].addEventListener("ended", onPlayEnded);
@@ -46,20 +42,44 @@ window.onload = function () {
     maxPlayNo = Object.keys(audios).length;
 
     // 再生ボタンイベント
-    $btnPlayPause.off("click");
-    $btnPlayPause.on("click", function (e) {
-      // 終了時に次を再生するイベント登録
-      Object.keys(audios).forEach((key) => {
-        audios[key].addEventListener("ended", onContinuousPlayEnded);
-      });
-      playPause();
-    });
+    setEvent("#btnPlayPause", "click", (e) => onClickBtnPlayPause(e));
+    // $btnPlayPause.off("click");
+    // $btnPlayPause.on("click", function (e) {
+    //   // 終了時に次を再生するイベント登録
+    //   Object.keys(audios).forEach((key) => {
+    //     audios[key].addEventListener("ended", onContinuousPlayEnded);
+    //   });
+    //   playPause();
+    // });
   });
 
   // 和文ボタンイベント
   setEvent("#btnJa", "click", () => onClickBtnSwitch("#btnJa", "p.ja"));
   setEvent("#btnEn", "click", () => onClickBtnSwitch("#btnEn", "p.en"));
+
+  // 終了ボタンイベント
+  setEvent("#btnEnd", "click", (e) => onClickBtnEnd(e));
 };
+
+// 終了ボタンクリック
+function onClickBtnEnd(e) {
+  location.href = "./../index.html";
+}
+
+// 再生ボタンクリック
+function onClickBtnPlayPause(e) {
+  // 終了時に次を再生するイベント登録
+  Object.keys(audios).forEach((key) => {
+    audios[key].addEventListener("ended", onContinuousPlayEnded);
+  });
+  playPause();
+}
+
+// スクリプトクリック
+function onClickScript(e) {
+  playNo = parseInt(e.currentTarget.id);
+  indiviualPlay();
+}
 
 // 和文・英文ボタンクリック
 function onClickBtnSwitch(btnSelecor, pSelector) {
