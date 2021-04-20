@@ -13,18 +13,29 @@ body {
   margin: 20px;
 }
 
-.radio {
+section {
+  padding: 10px;
+  margin: 0 auto 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/*********************************** 
+１つ目 
+************************************/
+
+.radio1 {
   display: inline-flex;
   overflow: hidden;
   border-radius: 15px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
 }
 
-.radio__input {
+.radio1 input {
   display: none;
 }
 
-.radio__lable {
+.radio1 label {
   padding: 8px 14px;
   font-size: 14px;
   color: white;
@@ -32,10 +43,63 @@ body {
   cursor: pointer;
 }
 
-.radio__lable:not(:last-of-type) {
+.radio1 label:not(:last-of-type) {
   border-right: 1px solid #006b56;
 }
 
-.radio__input:checked + .radio__lable {
+.radio1 input:checked+label {
   background-color: #006b56;
+}
+
+/*********************************** 
+２つ目 
+************************************/
+
+:root {
+  --clr-bg-radio2-label: #01cc65;
+}
+
+.radio2 {
+  display: flex;
+}
+
+.radio2 input {
+  display: none;
+}
+
+.radio2 label {
+  position: relative;
+  color: var(--clr-bg-radio2-label);
+  font-size: 30px;
+  border: 2px solid var(--clr-bg-radio2-label);
+  border-radius: 5px;
+  padding: 10px 50px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.radio2 label::before {
+  content: "";
+  height: 30px;
+  width: 30px;
+  border: 3px solid var(--clr-bg-radio2-label);
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.radio2 input:checked+label {
+  background-color: var(--clr-bg-radio2-label);
+  color: white;
+}
+
+.radio2 input:checked+label::before {
+  content: "\002714";
+  border: 3px solid white;
+  background-color: white;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
