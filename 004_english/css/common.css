@@ -1,0 +1,35 @@
+html {
+  font-size: 16px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+header,
+footer,
+body {
+  max-width: 60rem;
+}
+
+a,
+a:visited {
+  text-decoration: none;
+  color: #212121;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #3333ff;
+}
+
+button.normal {
+  background-color: blue;
+  color: white;
+}
+
+.hidden {
+  visibility: hidden;
+}
+/*# sourceMappingURL=common.css.map */
