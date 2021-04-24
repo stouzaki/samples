@@ -67,37 +67,12 @@ footer ul.table li {
   height: 100%;
 }
 
-footer ul.btn-group li {
-  width: 13%;
-  height: 2.7rem;
-  vertical-align: middle;
-  border-right: 1px solid #fff;
-  cursor: pointer;
-  background-color: #ccc;
-  color: #fff;
+footer .radio input {
+  display: none;
 }
 
-footer ul.btn-group li:hover {
-  background-color: blue;
-}
-
-footer ul.btn-group li:last-of-type {
-  border-radius: 0 4px 4px 0;
-  border-right: none;
-}
-
-footer ul.btn-group li:first-of-type {
-  border-radius: 4px 0 0 4px;
-}
-
-footer ul.btn-group li.selected {
-  background-color: blue;
-  color: white;
-}
-
-main {
-  padding-top: 3.2rem;
-  padding-bottom: 3.2rem;
+footer .radio input:checked + label {
+  background-color: green;
 }
 
 footer button.normal {
@@ -117,6 +92,11 @@ footer button.default {
 
 footer button.default:hover {
   background-color: #cccccc;
+}
+
+main {
+  padding-top: 3.2rem;
+  padding-bottom: 3.2rem;
 }
 
 article {
