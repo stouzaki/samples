@@ -62,6 +62,7 @@ function onClickBtnLoad(e) {
     let audio = audios[id];
     audio.load();
   });
+  alert("読み込み完了");
 }
 
 // 再生速度変更
