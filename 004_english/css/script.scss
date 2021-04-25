@@ -133,3 +133,10 @@ article {
 article.selected {
   background-color: #ffffea;
 }
+
+.load-confirm {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}

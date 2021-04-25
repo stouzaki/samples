@@ -5,16 +5,11 @@ var maxPlayNo;
 var $btnPlayPause;
 var $iconAllPlay;
 var $btnComplete;
-// var $speedSlider;
-var cntChangeSpeed = 0;
 
 // 初期表示
 $(function () {
   // 各部品をJQueryObjectとして取得
   $btnPlayPause = $("#btnPlayPause");
-  // $iconAllPlay = $("#icon-allplay");
-  // $btnComplete = $("#btn-complete");
-  // $speedSlider = $("#speed_slider");
 
   // Jsonからスクリプトを設定する
   const jsonFullName = getJsonPath("script.json");
@@ -43,14 +38,6 @@ window.onload = function () {
 
     // 再生ボタンイベント
     setEvent("#btnPlayPause", "click", (e) => onClickBtnPlayPause(e));
-    // $btnPlayPause.off("click");
-    // $btnPlayPause.on("click", function (e) {
-    //   // 終了時に次を再生するイベント登録
-    //   Object.keys(audios).forEach((key) => {
-    //     audios[key].addEventListener("ended", onContinuousPlayEnded);
-    //   });
-    //   playPause();
-    // });
   });
 
   // 和文ボタンイベント
@@ -64,7 +51,18 @@ window.onload = function () {
   setEvent("input[name='playBackSpeed']", "change", (e) =>
     onChangePlaySpeed(e)
   );
+
+  // スマホの場合は音声ロードに確認ダイアログが必要
+  setEvent("#loadConfirm", "load", (e) => onClickBtnLoad(e));
 };
+
+// 音声ロード
+function onClickBtnLoad(e) {
+  Object.keys(audios).forEach((id) => {
+    let audio = audios[id];
+    audio.load();
+  });
+}
 
 // 再生速度変更
 function onChangePlaySpeed(e) {
