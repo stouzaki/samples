@@ -51,49 +51,43 @@ footer {
     }
   }
   .radio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    label {
+      cursor: pointer;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      background: $clr-bg-default;
+      border: 1px solid $clr-border-default;
+      &:first-of-type {
+        border-radius: 0.5rem 0 0 0.5rem;
+      }
+      &:last-of-type {
+        border-radius: 0 0.5rem 0.5rem 0;
+      }
+    }
     input {
       display: none;
       &:checked + label {
-        background-color: green;
+        background-color: $clr-bg-normal;
+        color: $clr-font-normal;
       }
     }
   }
-  //   ul.btn-group li {
-  //     width: 13%;
-  //     height: 2.7rem;
-  //     vertical-align: middle;
-  //     border-right: 1px solid #fff;
-  //     cursor: pointer;
-  //     background-color: #ccc;
-  //     color: #fff;
-  //     &:hover {
-  //       background-color: $clr-bg-normal;
-  //     }
-  //     &:last-of-type {
-  //       border-radius: 0 4px 4px 0;
-  //       border-right: none;
-  //     }
-  //     &:first-of-type {
-  //       border-radius: 4px 0 0 4px;
-  //     }
-  //     &.selected {
-  //       background-color: $clr-bg-normal;
-  //       color: $clr-font-normal;
-  //     }
-  //   }
   button {
+    height: 100%;
+    width: 90%;
     &.normal {
       border: 1px solid $clr-border-normal;
       border-radius: 0.5rem;
-      height: 100%;
-      width: 90%;
     }
     &.default {
       background: $clr-bg-default;
       border: 1px solid $clr-border-default;
       border-radius: 0.5rem;
-      height: 100%;
-      width: 90%;
       &:hover {
         background-color: $clr-bg-default-hover;
       }
@@ -127,18 +121,13 @@ article {
   border-radius: 0.5rem;
   color: white;
   background-color: #dcdcdc;
-}
-
-.btn-switch:hover,
-.btn-switch.selected:hover {
-  height: 2.2rem;
-  width: 3.3rem;
-
-  /* background-color: #f4a460; */
-}
-
-.btn-switch.selected {
-  background-color: #8b4513;
+  &:hover,
+  &.selected:hover {
+    background-color: #f4a460;
+  }
+  &.selected {
+    background-color: #8b4513;
+  }
 }
 
 article.selected {

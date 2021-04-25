@@ -59,7 +59,24 @@ window.onload = function () {
 
   // 終了ボタンイベント
   setEvent("#btnEnd", "click", (e) => onClickBtnEnd(e));
+
+  // 再生速度変更イベント
+  setEvent("input[name='playBackSpeed']", "change", (e) =>
+    onChangePlaySpeed(e)
+  );
 };
+
+// 再生速度変更
+function onChangePlaySpeed(e) {
+  let value = parseFloat(e.currentTarget.value);
+  Object.keys(audios).forEach((id) => {
+    let audio = audios[id];
+    audio.defaultPlaybackRate = value;
+    audio.playbackRate = value;
+  });
+  // キャッシュする
+  localStorage.playSpeed = value;
+}
 
 // 終了ボタンクリック
 function onClickBtnEnd(e) {

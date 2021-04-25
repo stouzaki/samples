@@ -67,27 +67,63 @@ footer ul.table li {
   height: 100%;
 }
 
+footer .radio {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100%;
+}
+
+footer .radio label {
+  cursor: pointer;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: #e6e6e6;
+  border: 1px solid #cccccc;
+}
+
+footer .radio label:first-of-type {
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+footer .radio label:last-of-type {
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
 footer .radio input {
   display: none;
 }
 
 footer .radio input:checked + label {
-  background-color: green;
+  background-color: blue;
+  color: white;
+}
+
+footer button {
+  height: 100%;
+  width: 90%;
 }
 
 footer button.normal {
   border: 1px solid #cccccc;
   border-radius: 0.5rem;
-  height: 100%;
-  width: 90%;
 }
 
 footer button.default {
   background: #e6e6e6;
   border: 1px solid #cccccc;
   border-radius: 0.5rem;
-  height: 100%;
-  width: 90%;
 }
 
 footer button.default:hover {
@@ -124,11 +160,8 @@ article p {
   background-color: #dcdcdc;
 }
 
-.btn-switch:hover,
-.btn-switch.selected:hover {
-  height: 2.2rem;
-  width: 3.3rem;
-  /* background-color: #f4a460; */
+.btn-switch:hover, .btn-switch.selected:hover {
+  background-color: #f4a460;
 }
 
 .btn-switch.selected {
