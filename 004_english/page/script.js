@@ -53,7 +53,7 @@ window.onload = function () {
   );
 
   // スマホの場合は音声ロードに確認ダイアログが必要
-  setEvent("#loadConfirm", "load", (e) => onClickBtnLoad(e));
+  setEvent("#load", "click", (e) => onClickBtnLoad(e));
 };
 
 // 音声ロード
