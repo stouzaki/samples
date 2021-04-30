@@ -2,7 +2,6 @@
 var audios = {};
 var playNo = 1;
 var maxPlayNo;
-var $btnPlayPause;
 
 // 初期表示イベント登録
 document.addEventListener("DOMContentLoaded", onDOMContentLoaded);
@@ -10,9 +9,6 @@ window.addEventListener("load", onLoad);
 
 /** 初期表示 */
 function onDOMContentLoaded() {
-  // 各部品をJQueryObjectとして取得
-  $btnPlayPause = $("#btnPlayPause");
-
   // Jsonからスクリプトを設定する
   const jsonFullName = getSourcePath("script.json");
   setArticleText(jsonFullName);
@@ -35,16 +31,7 @@ function onLoad(e) {
   $(`#${localStorage.playSpeedId}`).prop("checked", true);
 }
 
-// // 音声ロード
-// function onClickBtnLoad(e) {
-//   Object.keys(audios).forEach((id) => {
-//     let audio = audios[id];
-//     audio.load();
-//   });
-//   alert("読み込み完了");
-// }
-
-// 再生速度変更
+/** 再生速度変更 */
 function onChangePlaySpeed(e) {
   let value = parseFloat(e.currentTarget.value);
   Object.keys(audios).forEach((id) => {
@@ -57,12 +44,12 @@ function onChangePlaySpeed(e) {
   localStorage.playSpeed = value;
 }
 
-// 終了ボタンクリック
+/** 終了ボタンクリック */
 function onClickBtnEnd(e) {
   location.href = "./../index.html";
 }
 
-// 再生ボタンクリック
+/** 再生ボタンクリック */
 function onClickBtnPlayPause(e) {
   // 終了時に次を再生するイベント登録
   Object.keys(audios).forEach((key) => {
@@ -71,26 +58,24 @@ function onClickBtnPlayPause(e) {
   playPause();
 }
 
-// スクリプトクリック
+/** スクリプトクリック */
 function onClickScript(e) {
   playNo = parseInt(e.currentTarget.id);
   indiviualPlay();
 }
 
-// 和文・英文ボタンクリック
+/** 和文・英文ボタンクリック */
 function onChangeBtnSwitch(e, pSelector) {
   $(pSelector).toggleClass("hidden");
 }
 
-// イベントを設定する
+/** イベントを設定する */
 function setEvent(selector, eventName, func) {
   $(document).off(eventName, selector);
   $(document).on(eventName, selector, func);
-  // $(selector).off(eventName);
-  // $(selector).on(eventName, func);
 }
 
-// 再生／一時停止
+/** 再生／一時停止 */
 function playPause() {
   // 再生中は一時停止
   if (isPlay()) {
@@ -101,7 +86,7 @@ function playPause() {
   play();
 }
 
-// 再生（個別）
+/** 再生（個別） */
 function indiviualPlay() {
   // 再生中のものは全て停止
   Object.keys(audios).forEach((id) => {
@@ -121,7 +106,7 @@ function indiviualPlay() {
   play();
 }
 
-// 再生中判定
+/** 再生中判定 */
 function isPlay() {
   let isPlay = false;
   Object.keys(audios).forEach((id) => {
@@ -134,14 +119,14 @@ function isPlay() {
   return isPlay;
 }
 
-// 再生
+/** 再生 */
 function play() {
   const id = getId(playNo);
   const audio = getAudio(playNo);
-  // const audio = audios[id];
   let $div = $("#" + id);
   $("body,html").animate({ scrollTop: $div.offset().top - 180 }, 400, "swing");
   $div.addClass("selected");
+  changeDisplayToPlay(true);
 
   audio.play();
 }
@@ -163,13 +148,13 @@ function pause() {
   audio.pause();
 }
 
-// 連続再生イベント削除
+/** 連続再生イベント削除 */
 function removeContinuousPlaybackEndedEvent() {
   let audio = getAudio(playNo);
   audio.removeEventListener("ended", onContinuousPlayEnded);
 }
 
-// クエリパラメータから対象フォルダを取得する
+/** クエリパラメータから対象フォルダを取得する */
 function getTargetFolder() {
   let str = "./";
   const queryValues = getQueryParameter();
@@ -179,15 +164,15 @@ function getTargetFolder() {
   return str;
 }
 
-// 再生終了時イベント（個別再生用）
+/** 再生終了時イベント（個別再生用） */
 function onPlayEnded(e) {
   let id = ("00" + playNo).slice(-2);
   let $div = $("#" + id);
   $div.removeClass("selected");
-  // changeDisplayToPlay();
+  changeDisplayToPlay(false);
 }
 
-// 再生終了時イベント（連続再生用）
+/** 再生終了時イベント（連続再生用） */
 function onContinuousPlayEnded() {
   // 連続再生イベント削除
   removeContinuousPlaybackEndedEvent();
@@ -196,8 +181,12 @@ function onContinuousPlayEnded() {
     play(++playNo);
   } else {
     playNo = 1;
-    // changeDisplayToPlay();
   }
+}
+
+/** 再生ボタンの切り替え(true=stopボタン、false=再生ボタン) */
+function changeDisplayToPlay(is) {
+  $("#btnPlayPause").prop("checked", is);
 }
 
 /** クエリパラメータからソースのパスを取得する */
