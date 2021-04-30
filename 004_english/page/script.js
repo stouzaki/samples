@@ -3,67 +3,66 @@ var audios = {};
 var playNo = 1;
 var maxPlayNo;
 var $btnPlayPause;
-var $iconAllPlay;
-var $btnComplete;
+
+// 初期表示イベント登録
+document.addEventListener("DOMContentLoaded", onDOMContentLoaded);
+window.addEventListener("load", onLoad);
 
 // 初期表示
-$(function () {
+function onDOMContentLoaded() {
   // 各部品をJQueryObjectとして取得
   $btnPlayPause = $("#btnPlayPause");
 
   // Jsonからスクリプトを設定する
-  const jsonFullName = getJsonPath("script.json");
+  const jsonFullName = getSourcePath("script.json");
   setArticleText(jsonFullName);
-});
+}
 
-// 描画完了後（TemplateタグのDom描画も完了した後）
-window.onload = function () {
+// 初期表示（描画完了後（TemplateタグのDom描画も完了した後））
+function onLoad(e) {
   let $s = $(".script");
   $s.each(function (index, element) {
     let id = $(element).attr("id");
-    let audio = new Audio();
+    const audio = getAudio(index + 1);
     audio.preload = "auto";
     audio.src = getTargetFolder() + id + ".mp3";
     audio.load();
     audios[id] = audio;
-
-    // 再生イベント（個別）
-    setEvent(`#${id}`, "click", (e) => onClickScript(e));
-
     // 再生終了時イベント（個別）
     audios[id].addEventListener("ended", onPlayEnded);
-
     // 最後の番号
     maxPlayNo = Object.keys(audios).length;
-
     // 再生ボタンイベント
-    setEvent("#btnPlayPause", "click", (e) => onClickBtnPlayPause(e));
+    setEvent("#btnPlayPause", "click", onClickBtnPlayPause);
   });
-
   // 和文ボタンイベント
-  setEvent("#btnJa", "click", () => onClickBtnSwitch("#btnJa", "p.ja"));
-  setEvent("#btnEn", "click", () => onClickBtnSwitch("#btnEn", "p.en"));
-
+  setEvent("#btnJa", "change", (e) => onChangeBtnSwitch(e, "p.ja"));
+  setEvent("#btnEn", "change", (e) => onChangeBtnSwitch(e, "p.en"));
   // 終了ボタンイベント
-  setEvent("#btnEnd", "click", (e) => onClickBtnEnd(e));
-
+  setEvent("#btnEnd", "click", onClickBtnEnd);
   // 再生速度変更イベント
-  setEvent("input[name='playBackSpeed']", "change", (e) =>
-    onChangePlaySpeed(e)
-  );
-
-  // スマホの場合は音声ロードに確認ダイアログが必要
-  setEvent("#load", "click", (e) => onClickBtnLoad(e));
-};
-
-// 音声ロード
-function onClickBtnLoad(e) {
-  Object.keys(audios).forEach((id) => {
-    let audio = audios[id];
-    audio.load();
-  });
-  alert("読み込み完了");
+  setEvent("input[name='playBackSpeed']", "change", onChangePlaySpeed);
+  // // スマホの場合は音声ロードに確認ダイアログが必要
+  // setEvent("#load", "click", onClickBtnLoad);
+  // 再生速度をキャッシュから設定する
+  $(`#${localStorage.playSpeedId}`).prop("checked", true);
+  $("input[name='playBackSpeed']").trigger("change");
 }
+
+// クリックイベント（スマホ対応）
+$(document).on("click", ".script", function (e) {
+  // スクリプトクリック
+  onClickScript(e);
+});
+
+// // 音声ロード
+// function onClickBtnLoad(e) {
+//   Object.keys(audios).forEach((id) => {
+//     let audio = audios[id];
+//     audio.load();
+//   });
+//   alert("読み込み完了");
+// }
 
 // 再生速度変更
 function onChangePlaySpeed(e) {
@@ -72,9 +71,12 @@ function onChangePlaySpeed(e) {
     let audio = audios[id];
     audio.defaultPlaybackRate = value;
     audio.playbackRate = value;
+    // const au = $(`#${id} audio`)[0];
+    // au.defaultPlaybackRate = value;
+    // au.playbackRate = value;
   });
   // キャッシュする
-  localStorage.playSpeed = value;
+  localStorage.playSpeedId = e.currentTarget.id;
 }
 
 // 終了ボタンクリック
@@ -98,8 +100,7 @@ function onClickScript(e) {
 }
 
 // 和文・英文ボタンクリック
-function onClickBtnSwitch(btnSelecor, pSelector) {
-  $(btnSelecor).toggleClass("selected");
+function onChangeBtnSwitch(e, pSelector) {
   $(pSelector).toggleClass("hidden");
 }
 
@@ -111,11 +112,13 @@ function setEvent(selector, eventName, func) {
 
 // 再生／一時停止
 function playPause() {
+  // 再生中は一時停止
   if (isPlay()) {
     pause();
-  } else {
-    play();
+    return;
   }
+
+  play();
 }
 
 // 再生（個別）
@@ -131,6 +134,7 @@ function indiviualPlay() {
     let $div = $("#" + id);
     $div.removeClass("selected");
   });
+
   // 連続再生イベント削除
   removeContinuousPlaybackEndedEvent();
   // 再生
@@ -152,27 +156,34 @@ function isPlay() {
 
 // 再生
 function play() {
-  let id = ("00" + playNo).slice(-2);
-  let audio = audios[id];
+  const id = getId(playNo);
+  const audio = getAudio(playNo);
   let $div = $("#" + id);
   $("body,html").animate({ scrollTop: $div.offset().top - 180 }, 400, "swing");
   $div.addClass("selected");
   audio.play();
-  // changeDisplayToPause();
 }
 
-// 一時停止
+/** スクリプトのID取得 */
+function getId(no) {
+  return ("00" + no).slice(-2);
+}
+
+/** audio取得 */
+function getAudio(no) {
+  let id = getId(no);
+  return $(`#${id} audio`)[0];
+}
+
+/** 一時停止 */
 function pause() {
-  let id = ("00" + playNo).slice(-2);
-  let audio = audios[id];
+  let audio = getAudio(playNo);
   audio.pause();
-  // changeDisplayToPlay();
 }
 
 // 連続再生イベント削除
 function removeContinuousPlaybackEndedEvent() {
-  let id = ("00" + playNo).slice(-2);
-  let audio = audios[id];
+  let audio = getAudio(playNo);
   audio.removeEventListener("ended", onContinuousPlayEnded);
 }
 
@@ -200,7 +211,6 @@ function onContinuousPlayEnded() {
   removeContinuousPlaybackEndedEvent();
 
   if (playNo < maxPlayNo) {
-    // play(++playNo);
     play(++playNo);
   } else {
     playNo = 1;
@@ -208,8 +218,8 @@ function onContinuousPlayEnded() {
   }
 }
 
-// クエリパラメータからJsonPathを取得する
-function getJsonPath(fileName) {
+/** クエリパラメータからソースのパスを取得する */
+function getSourcePath(fileName) {
   let str = "./";
 
   const queryValues = getQueryParameter();
@@ -220,15 +230,15 @@ function getJsonPath(fileName) {
   return getTargetFolder() + fileName;
 }
 
-// クエリパラメータを取得する
+/** クエリパラメータを取得する */
 function getQueryParameter() {
   let array = [];
 
   const queryString = location.search;
   const parameters = queryString.split("&");
 
-  parameters.forEach((parameter) => {
-    const value = parameter.split("=")[1];
+  parameters.forEach((p) => {
+    const value = p.split("=")[1];
     array.push(value);
   });
 
@@ -241,13 +251,13 @@ function setArticleText(name) {
     datas.forEach((data, i) => {
       const target = $("main")[0];
       const content = $("#scriptTemplate")[0].content;
+      const id = ("00" + (i + 1)).slice(-2);
 
       const clone = document.importNode(content, true);
-      clone
-        .querySelector("article")
-        .setAttribute("id", ("00" + (i + 1)).slice(-2));
+      clone.querySelector("article").setAttribute("id", id);
       clone.querySelector("p.ja").textContent = data.ja;
       clone.querySelector("p.en").textContent = data.en;
+      clone.querySelector("audio").src = getSourcePath(`${id}.mp3`);
 
       target.appendChild(clone);
     });

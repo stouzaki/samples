@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/earlyaccess/notosansjapanese.css);
+
 *,
 *::before,
 *::after {
@@ -6,6 +8,9 @@
   border: 0;
   outline: 0;
   box-sizing: border-box;
-  font-family: "Courier New", Courier, sans-serif, monospace;
   background: transparent;
+}
+
+body {
+  font-family: "Noto Sans Japanese", sans-serif;
 }

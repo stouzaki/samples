@@ -11,17 +11,19 @@
     <link rel="stylesheet" href="../../css/reset.css" />
     <link rel="stylesheet" href="../css/common.css" />
     <link rel="stylesheet" href="../css/script.css" />
-    <script src="../lib/jquery-3.6.0.min.js"></script>
-    <script src="./script.js"></script>
+    <script defer src="../lib/jquery-3.6.0.min.js"></script>
+    <script defer src="./script.js"></script>
   </head>
 
   <body>
     <header>
       <ul>
         <li><a href="../index.html">Top</a></li>
-        <li>
-          <button id="btnJa" class="btn-switch selected">和文</button>
-          <button id="btnEn" class="btn-switch selected">英文</button>
+        <li class="switch">
+          <input type="checkbox" id="btnJa" checked />
+          <label for="btnJa">和文</label>
+          <input type="checkbox" id="btnEn" checked />
+          <label for="btnEn">英文</label>
         </li>
       </ul>
     </header>
@@ -76,12 +78,8 @@
       <article class="script">
         <p class="ja"></p>
         <p class="en"></p>
+        <audio src=""></audio>
       </article>
     </template>
-
-    <div id="loadConfirm" class="load-confirm">
-      <h1>音声ファイルを読み込みます。</h1>
-      <button id="load">はい</button>
-    </div>
   </body>
 </html>
