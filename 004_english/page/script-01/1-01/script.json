@@ -1,52 +1,56 @@
-[
+{
+  "title_no": "script-01_1-01",
+  "title": "定番の表現",
+  "scripts": [
     {
-        "id": "01",
-        "ja": "おはようございます。",
-        "en": "Good morning."
+      "id": "01",
+      "ja": "おはようございます。",
+      "en": "Good morning."
     },
     {
-        "id": "02",
-        "ja": "こんにちは。",
-        "en": "Hello."
+      "id": "02",
+      "ja": "こんにちは。",
+      "en": "Hello."
     },
     {
-        "id": "03",
-        "ja": "こんばんは。",
-        "en": "Good evening."
+      "id": "03",
+      "ja": "こんばんは。",
+      "en": "Good evening."
     },
     {
-        "id": "04",
-        "ja": "はじめまして。",
-        "en": "Nice to meet you."
+      "id": "04",
+      "ja": "はじめまして。",
+      "en": "Nice to meet you."
     },
     {
-        "id": "05",
-        "ja": "お会いできるのを楽しみにしていました。",
-        "en": "I was looking forward to meeting you."
+      "id": "05",
+      "ja": "お会いできるのを楽しみにしていました。",
+      "en": "I was looking forward to meeting you."
     },
     {
-        "id": "06",
-        "ja": "こちらこそ。",
-        "en": "Same here."
+      "id": "06",
+      "ja": "こちらこそ。",
+      "en": "Same here."
     },
     {
-        "id": "07",
-        "ja": "友達のマットを紹介しますね。",
-        "en": "This my frind, Matt."
+      "id": "07",
+      "ja": "友達のマットを紹介しますね。",
+      "en": "This my frind, Matt."
     },
     {
-        "id": "08",
-        "ja": "おうわさは伺っています。",
-        "en": "I've heard a lot about you."
+      "id": "08",
+      "ja": "おうわさは伺っています。",
+      "en": "I've heard a lot about you."
     },
     {
-        "id": "09",
-        "ja": "お会いできてうれしいです。",
-        "en": "I'm happy to meet you."
+      "id": "09",
+      "ja": "お会いできてうれしいです。",
+      "en": "I'm happy to meet you."
     },
     {
-        "id": "10",
-        "ja": "よろしくお願いします。",
-        "en": "It's pleasure to meet you."
+      "id": "10",
+      "ja": "よろしくお願いします。",
+      "en": "It's pleasure to meet you."
     }
-]
+  ]
+}

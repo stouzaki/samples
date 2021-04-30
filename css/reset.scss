@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/earlyaccess/notosansjapanese.css);
+@import url(https://use.fontawesome.com/releases/v5.1.0/css/all.css);
 
 *,
 *::before,
@@ -11,6 +12,6 @@
   background: transparent;
 }
 
-body {
+* {
   font-family: "Noto Sans Japanese", sans-serif;
 }

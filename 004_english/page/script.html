@@ -18,7 +18,10 @@
   <body>
     <header>
       <ul>
-        <li><a href="../index.html">Top</a></li>
+        <li>
+          <h5 id="title_no" class="title_no"></h5>
+          <h3 id="title" class="title"></h3>
+        </li>
         <li class="switch">
           <input type="checkbox" id="btnJa" checked />
           <label for="btnJa">和文</label>
@@ -70,7 +73,11 @@
             <label for="playBackSpeed_20">×2.0</label>
           </div>
         </li>
-        <li><button id="btnPlayPause" class="normal">再生 / 停止</button></li>
+        <li>
+          <input type="checkbox" id="btnPlayPause" class="chk-btn" />
+          <label for="btnPlayPause"></label>
+        </li>
+        <!-- <li><button id="btnPlayPause" class="normal">再生 / 停止</button></li> -->
         <li><button id="btnEnd" class="default">終了</button></li>
       </ul>
     </footer>

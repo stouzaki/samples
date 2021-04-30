@@ -8,7 +8,7 @@ var $btnPlayPause;
 document.addEventListener("DOMContentLoaded", onDOMContentLoaded);
 window.addEventListener("load", onLoad);
 
-// 初期表示
+/** 初期表示 */
 function onDOMContentLoaded() {
   // 各部品をJQueryObjectとして取得
   $btnPlayPause = $("#btnPlayPause");
@@ -18,23 +18,12 @@ function onDOMContentLoaded() {
   setArticleText(jsonFullName);
 }
 
-// 初期表示（描画完了後（TemplateタグのDom描画も完了した後））
+/** 初期表示（描画完了後（TemplateタグのDom描画も完了した後）） */
 function onLoad(e) {
-  let $s = $(".script");
-  $s.each(function (index, element) {
-    let id = $(element).attr("id");
-    const audio = getAudio(index + 1);
-    audio.preload = "auto";
-    audio.src = getTargetFolder() + id + ".mp3";
-    audio.load();
-    audios[id] = audio;
-    // 再生終了時イベント（個別）
-    audios[id].addEventListener("ended", onPlayEnded);
-    // 最後の番号
-    maxPlayNo = Object.keys(audios).length;
-    // 再生ボタンイベント
-    setEvent("#btnPlayPause", "click", onClickBtnPlayPause);
-  });
+  // スクリプトクリック
+  setEvent(".script", "click", onClickScript);
+  // 再生ボタンイベント
+  setEvent("#btnPlayPause", "click", onClickBtnPlayPause);
   // 和文ボタンイベント
   setEvent("#btnJa", "change", (e) => onChangeBtnSwitch(e, "p.ja"));
   setEvent("#btnEn", "change", (e) => onChangeBtnSwitch(e, "p.en"));
@@ -42,18 +31,9 @@ function onLoad(e) {
   setEvent("#btnEnd", "click", onClickBtnEnd);
   // 再生速度変更イベント
   setEvent("input[name='playBackSpeed']", "change", onChangePlaySpeed);
-  // // スマホの場合は音声ロードに確認ダイアログが必要
-  // setEvent("#load", "click", onClickBtnLoad);
   // 再生速度をキャッシュから設定する
   $(`#${localStorage.playSpeedId}`).prop("checked", true);
-  $("input[name='playBackSpeed']").trigger("change");
 }
-
-// クリックイベント（スマホ対応）
-$(document).on("click", ".script", function (e) {
-  // スクリプトクリック
-  onClickScript(e);
-});
 
 // // 音声ロード
 // function onClickBtnLoad(e) {
@@ -71,12 +51,10 @@ function onChangePlaySpeed(e) {
     let audio = audios[id];
     audio.defaultPlaybackRate = value;
     audio.playbackRate = value;
-    // const au = $(`#${id} audio`)[0];
-    // au.defaultPlaybackRate = value;
-    // au.playbackRate = value;
   });
   // キャッシュする
   localStorage.playSpeedId = e.currentTarget.id;
+  localStorage.playSpeed = value;
 }
 
 // 終了ボタンクリック
@@ -106,8 +84,10 @@ function onChangeBtnSwitch(e, pSelector) {
 
 // イベントを設定する
 function setEvent(selector, eventName, func) {
-  $(selector).off(eventName);
-  $(selector).on(eventName, func);
+  $(document).off(eventName, selector);
+  $(document).on(eventName, selector, func);
+  // $(selector).off(eventName);
+  // $(selector).on(eventName, func);
 }
 
 // 再生／一時停止
@@ -158,9 +138,11 @@ function isPlay() {
 function play() {
   const id = getId(playNo);
   const audio = getAudio(playNo);
+  // const audio = audios[id];
   let $div = $("#" + id);
   $("body,html").animate({ scrollTop: $div.offset().top - 180 }, 400, "swing");
   $div.addClass("selected");
+
   audio.play();
 }
 
@@ -247,19 +229,30 @@ function getQueryParameter() {
 
 // Jsonから本文を設定する
 function setArticleText(name) {
-  $.getJSON(name, (datas) => {
-    datas.forEach((data, i) => {
+  $.getJSON(name, (data) => {
+    $("#title_no").text(data.title_no);
+    $("#title").text(data.title);
+
+    data.scripts.forEach((script, i) => {
       const target = $("main")[0];
       const content = $("#scriptTemplate")[0].content;
       const id = ("00" + (i + 1)).slice(-2);
 
       const clone = document.importNode(content, true);
       clone.querySelector("article").setAttribute("id", id);
-      clone.querySelector("p.ja").textContent = data.ja;
-      clone.querySelector("p.en").textContent = data.en;
-      clone.querySelector("audio").src = getSourcePath(`${id}.mp3`);
+      clone.querySelector("p.ja").textContent = script.ja;
+      clone.querySelector("p.en").textContent = script.en;
+
+      const audio = clone.querySelector("audio");
+      audio.src = getSourcePath(`${id}.mp3`);
+      audio.defaultPlaybackRate = localStorage.playSpeed;
+      audio.playbackRate = localStorage.playSpeed;
+      audio.addEventListener("ended", onPlayEnded);
+      audios[id] = audio;
 
       target.appendChild(clone);
     });
+    $("title").html(`${data.title_no} ${data.title}`);
+    maxPlayNo = data.scripts.length;
   });
 }
