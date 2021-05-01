@@ -1,0 +1,15 @@
+{
+  "name": "英語のえいた",
+  "short_name": "えいた",
+  "icons": [
+    {
+      "src": "/samples/004_english/apple-touch-icon.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "https://stouzaki.github.io/EnglishEita/index.html?utm_source=homescreen",
+  "display": "standalone",
+  "background_color": "#ff7f27",
+  "theme_color": "#ff7f27"
+}

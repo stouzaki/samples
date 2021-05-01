@@ -1,0 +1,15 @@
+header {
+  background: linear-gradient(
+    to right,
+    hsl(240, 100%, 50%),
+    hsl(240, 100%, 60%)
+  );
+  padding: 0.3rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 5rem;
+  img {
+    height: 100%;
+  }
+}

@@ -4,21 +4,50 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>StudyEnglish</title>
+    <!-- start iOS用PWA設定 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="#FFD51B" />
+    <meta name="apple-mobile-web-app-title" content="英語のえいた" />
+    <!-- end iOS用PWA設定 -->
+    <!-- start Android用PWA設定-->
+    <link rel="manifest" href="manifest.json" />
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("sw.js").then((reg) => {
+          console.log("Service worker registered.", reg);
+        });
+      }
+    </script>
+    <!-- end Android用PWA設定-->
+    <!-- Android用タブの色 -->
+    <meta name="theme-color" content="#ff7f27" />
+    <title>英語のえいた</title>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="144x144" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="./apple-touch-icon.png"
+      sizes="144x144"
+    />
     <link rel="stylesheet" href="../css/reset.css" />
     <link rel="stylesheet" href="./css/common.css" />
+    <link rel="stylesheet" href="./css/index.css" />
   </head>
 
   <body>
     <!-- とりあえず -->
-    <header></header>
+    <header>
+      <img src="./img/logo.png" alt="" />
+    </header>
     <main>
       <section>
-        <img src="" alt="" srcset="" />
-        <h3>タイトル</h3>
+        <h3>(Script-01) 何でも英語で言ってみる！シンプル英語フレーズ2000</h3>
         <ul>
           <li>
-            <a href="./page/script.html?c1=script-01&c2=1-01">script-01/1-01</a>
+            <a href="./page/script.html?c1=script-01&c2=1-01"
+              >1-01 定番の表現</a
+            >
           </li>
         </ul>
       </section>
