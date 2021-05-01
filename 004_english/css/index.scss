@@ -29,7 +29,7 @@ h3 {
   &::before {
     counter-reset: sub-no 0;
     counter-increment: cat-no 1;
-    content: "Script-" counter(cat-no, decimal-leading-zero);
+    content: "【Script-" counter(cat-no, decimal-leading-zero) "】";
     margin-right: 1rem;
   }
 }
