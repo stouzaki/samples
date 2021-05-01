@@ -19,8 +19,6 @@
       }
     </script>
     <!-- end Android用PWA設定-->
-    <!-- Android用タブの色 -->
-    <meta name="theme-color" content="#ff7f27" />
     <title>英語のえいた</title>
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="144x144" />
@@ -33,6 +31,8 @@
     <link rel="stylesheet" href="../css/reset.css" />
     <link rel="stylesheet" href="./css/common.css" />
     <link rel="stylesheet" href="./css/index.css" />
+    <script defer src="./lib/jquery-3.6.0.min.js"></script>
+    <script defer src="./index.js"></script>
   </head>
 
   <body>
@@ -41,15 +41,38 @@
       <img src="./img/logo.png" alt="" />
     </header>
     <main>
-      <section>
-        <h3>(Script-01) 何でも英語で言ってみる！シンプル英語フレーズ2000</h3>
-        <ul>
-          <li>
-            <a href="./page/script.html?c1=script-01&c2=1-01"
-              >1-01 定番の表現</a
-            >
-          </li>
-        </ul>
+      <h3>何でも英語で言ってみる！シンプル英語フレーズ2000</h3>
+      <section class="category">
+        <details class="sub">
+          <summary>定番の表現</summary>
+          <ol>
+            <li><a>初対面の挨拶</a></li>
+            <li><a>その他の挨拶</a></li>
+            <li><a>別れ</a></li>
+            <li><a>お礼</a></li>
+            <li><a>おわび</a></li>
+            <li><a>あいづち</a></li>
+            <li><a>肯定</a></li>
+            <li><a>否定</a></li>
+            <li><a>頼む</a></li>
+            <li><a>祝う</a></li>
+            <li><a>ほめる</a></li>
+            <li><a>励ます</a></li>
+          </ol>
+        </details>
+        <details class="sub">
+          <summary>自己紹介</summary>
+          <ol>
+            <li><a>名前</a></li>
+            <li><a>出身地</a></li>
+          </ol>
+        </details>
+        <details class="sub">
+          <summary>一日の流れ～朝</summary>
+          <ol>
+            <li><a>起床</a></li>
+          </ol>
+        </details>
       </section>
     </main>
   </body>

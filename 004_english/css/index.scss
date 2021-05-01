@@ -13,3 +13,86 @@ header {
     height: 100%;
   }
 }
+
+main {
+  padding-top: 0.4rem;
+}
+
+.category {
+  counter-reset: cat-no 0;
+  counter-reset: sub-no 0;
+}
+
+// カテゴリの見出し
+h3 {
+  margin-bottom: 0.4rem;
+  &::before {
+    counter-reset: sub-no 0;
+    counter-increment: cat-no 1;
+    content: "Script-" counter(cat-no, decimal-leading-zero);
+    margin-right: 1rem;
+  }
+}
+
+// Chapterの見出し
+summary {
+  background: hsl(180, 80%, 90%);
+  border-radius: 0.2rem;
+  padding: 0.2rem;
+  cursor: pointer;
+  font-weight: 700;
+  height: 3rem;
+  &::before {
+    counter-increment: sub-no 1;
+    content: "Chapter " counter(sub-no);
+    margin-right: 0.8rem;
+  }
+  &::marker {
+    color: blue;
+    font-size: 1.4rem;
+  }
+}
+
+ol {
+  padding-left: 1.5em;
+  > li {
+    padding: 0.2rem 0.2rem 0.4rem 0.4rem;
+    font-size: larger;
+    a,
+    a:visited {
+      text-decoration: underline;
+      color: blue;
+    }
+  }
+}
+
+.category {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sub {
+  min-width: calc(100% / 3 - 1rem);
+  //   background: burlywood;
+  padding: 0.2rem;
+  margin-right: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+@media screen and (max-width: 480px) {
+  .sub {
+    width: 100%;
+    margin: 0 0 0.4rem 0;
+  }
+
+  h3 {
+    &::before {
+      display: block;
+    }
+  }
+
+  summary {
+    font-size: 1.2rem;
+  }
+}
