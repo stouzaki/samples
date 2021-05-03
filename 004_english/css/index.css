@@ -60,7 +60,7 @@ summary::marker {
 }
 
 ol {
-  padding-left: 1.5em;
+  padding-left: 2em;
 }
 
 ol > li {
@@ -88,6 +88,10 @@ ol > li a:visited {
   margin-right: 0.8rem;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+.from {
+  background: yellow;
 }
 
 @media screen and (max-width: 480px) {

@@ -54,7 +54,7 @@ summary {
 }
 
 ol {
-  padding-left: 1.5em;
+  padding-left: 2em;
   > li {
     padding: 0.2rem 0.2rem 0.4rem 0.4rem;
     font-size: larger;
@@ -78,6 +78,10 @@ ol {
   margin-right: 0.8rem;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+.from {
+  background: yellow;
 }
 
 @media screen and (max-width: 480px) {

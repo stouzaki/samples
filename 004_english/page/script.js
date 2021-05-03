@@ -23,7 +23,7 @@ function onLoad(e) {
   // 和文ボタンイベント
   setEvent("#btnJa", "change", (e) => onChangeBtnSwitch(e, "p.ja"));
   setEvent("#btnEn", "change", (e) => onChangeBtnSwitch(e, "p.en"));
-  // 終了ボタンイベント
+  // 戻るボタンイベント
   setEvent("#btnEnd", "click", onClickBtnEnd);
   // 再生速度変更イベント
   setEvent("input[name='playBackSpeed']", "change", onChangePlaySpeed);
@@ -44,9 +44,9 @@ function onChangePlaySpeed(e) {
   localStorage.playSpeed = value;
 }
 
-/** 終了ボタンクリック */
+/** 戻るボタンクリック */
 function onClickBtnEnd(e) {
-  location.href = "./../index.html";
+  location.href = `./../index.html${location.search}`;
 }
 
 /** 再生ボタンクリック */
@@ -241,7 +241,7 @@ function setArticleText(name) {
 
       target.appendChild(clone);
     });
-    $("title").html(`${data.title_no} ${data.title}`);
+    $("title").html(`${data.title}`);
     maxPlayNo = data.scripts.length;
   });
 }
