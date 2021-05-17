@@ -5,18 +5,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./css/index.css" />
+    <script defer src="./index.js"></script>
   </head>
   <body>
-    <div id="progressBar" class="progress-bar" data-label="Loading..."></div>
+    <div class="wrapper">
+      <a id="anchor" onclick="onClick();" href="" download="dummy.txt"
+        >Download Archive.zip</a
+      >
+      <div id="progressArea">
+        <div id="progressBarOuter">
+          <div id="progressBarInner"></div>
+        </div>
+        <div id="messageArea">
+          <div id="currentPercent">100%</div>
+          <div id="currentFileName">実行中ファイル名</div>
+          <div>
+            <span>(</span>
+            <span id="currentNo">1</span>
+            <span>/</span>
+            <span id="totalNo">5</span>
+            <span>)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script>
-      const progressBar = document.getElementById("progressBar");
-      setInterval(() => {
-        const computedStyle = getComputedStyle(progressBar);
-        const width =
-          parseFloat(computedStyle.getPropertyValue("--width")) || 0;
-        progressBar.style.setProperty("--width", width + 0.1);
-      }, 5);
+      // const progressBar = document.getElementById("progressBar");
+      // setInterval(() => {
+      //   const computedStyle = getComputedStyle(progressBar);
+      //   const width =
+      //     parseFloat(computedStyle.getPropertyValue("--width")) || 0;
+      //   progressBar.style.setProperty("--width", width + 0.1);
+      // }, 5);
     </script>
   </body>
 </html>
