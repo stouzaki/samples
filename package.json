@@ -1,0 +1,28 @@
+{
+  "name": "samples",
+  "version": "1.0.0",
+  "description": "\"# samples\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stouzaki/samples.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stouzaki/samples/issues"
+  },
+  "homepage": "https://github.com/stouzaki/samples#readme",
+  "devDependencies": {
+    "@types/node": "^15.12.0",
+    "typescript": "^4.3.2"
+  },
+  "dependencies": {
+    "@types/jquery": "^3.5.5",
+    "jquery": "^3.6.0"
+  }
+}
